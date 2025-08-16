@@ -1,14 +1,10 @@
-import { useState } from 'react'
+import { Client } from 'boardgame.io/react';
+import { MyGame } from '@game/game.ts';
 
 
-
-function App() {
-
-  return (
-    <>
-      
-    </>
-  )
-}
+const App = Client({ 
+  game: MyGame, 
+  debug: true,
+});
 
 export default App

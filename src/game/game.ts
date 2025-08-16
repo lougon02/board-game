@@ -1,6 +1,11 @@
-import type { Ctx, PlayerID } from "boardgame.io";
+import type { Game } from "boardgame.io";
+import type { MyGameState } from "./state";
+import { moves } from "./moves";
 
-interface GameState {
+export const MyGame: Game<MyGameState> = {
+  setup: () => ({
+    cells: Array.from({ length: 19 }, () => Array(19).fill(null)),
+  }),
 
-}
-
+  moves,
+};
