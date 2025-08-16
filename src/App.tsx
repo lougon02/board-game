@@ -1,10 +1,28 @@
-import { Client } from 'boardgame.io/react';
-import { MyGame } from '@game/game.ts';
+import React, { useRef }  from "react";
+import { Client } from "boardgame.io/react";
+import { MyGame } from "@game/game.ts";
+import { DiceRoller } from '@components/Board/DiceRollOverlay';
+import type { DiceRollerHandle } from '@components/Board/DiceRollOverlay';
+import Board from '@components/Board/Board.tsx';
 
 
-const App = Client({ 
-  game: MyGame, 
+// Create the BGIO client
+const GameClient = Client({
+  game: MyGame,
+  board: Board,
   debug: true,
 });
 
-export default App
+
+const App: React.FC = () => {
+  return (
+    <div className="w-screen h-screen flex items-center justify-center">
+      {/* GameClient now fills the parent */}
+      <div className="w-full h-full p-4 relative object-contain">
+        <GameClient />
+      </div>
+    </div>
+  );
+};
+
+export default App;

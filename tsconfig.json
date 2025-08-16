@@ -9,7 +9,8 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@styles/*": ["styles/*"],
-      "@game/*": ["game/*"]
+      "@game/*": ["game/*"],
+      "@components/*": ["components/*"]
     }
   },
   "include": ["src"]

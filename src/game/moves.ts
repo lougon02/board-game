@@ -21,9 +21,18 @@ export const resetBoard: Move<MyGameState> = (({G, ctx}) => {
   console.log(`The board was reset`);
 });
 
+export const throwDice: Move<MyGameState> = ({G, ctx}) => {
+  const diceRoll = Math.floor(Math.random() * 6) + 1;
+  console.log(`Player ${ctx.currentPlayer} threw a ${diceRoll}`);
+};
 
-// Export all moves
+export const askQuestion: Move<MyGameState> = ({G, ctx}, question: string) => {
+  console.log(`Player ${ctx.currentPlayer} asked a question: ${question}`);
+};
+
 export const moves = {
   moveToCell,
   resetBoard,
+  throwDice,
+  askQuestion,
 };

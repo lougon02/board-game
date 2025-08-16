@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@3d-dice/dice-box": "^1.1.4",
+    "@3d-dice/dice-box-threejs": "^0.0.12",
+    "@3d-dice/dice-ui": "^0.5.2",
     "@heroicons/react": "^2.2.0",
     "autoprefixer": "^10.4.21",
     "boardgame.io": "^0.50.2",

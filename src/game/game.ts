@@ -1,6 +1,7 @@
 import type { Game } from "boardgame.io";
 import type { MyGameState } from "./state";
 import { moves } from "./moves";
+import { phases } from "./phases";
 
 export const MyGame: Game<MyGameState> = {
   setup: () => ({
@@ -8,4 +9,26 @@ export const MyGame: Game<MyGameState> = {
   }),
 
   moves,
+
+  phases,
+
+  turn: {
+    stages: {
+      throwDice: {
+        moves: {
+          throwDice: moves.throwDice,
+        },
+      },
+      movePlayer: {
+        moves: {
+          moveToCell: moves.moveToCell,
+        },
+      },
+      askQuestion: {
+        moves: {
+          askQuestion: moves.askQuestion,
+        },
+      },
+    },
+  },
 };
