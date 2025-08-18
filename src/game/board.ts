@@ -26,4 +26,8 @@ export class GameBoard {
   getGrid(): Array<Array<Player>> {
     return this.grid;
   }
+
+  getSize(): number {
+    return this.size;
+  }
 }
