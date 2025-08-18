@@ -32,7 +32,16 @@
      inkscape:window-x="-6"
      inkscape:window-y="-6"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2" />
+     inkscape:current-layer="layer2">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="950"
+       height="950"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs1" />
   <g
@@ -177,7 +186,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      sodipodi:insensitive="true"
-     style="display:inline">
+     style="display:none">
     <rect
        style="fill:#000000;fill-opacity:0;stroke:#ffffff;stroke-width:0.5;stroke-dasharray:none"
        id="use5188"

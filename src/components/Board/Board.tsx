@@ -2,7 +2,8 @@ import React, { useRef }  from "react";
 import { DiceRoller } from '@components/Board/DiceRollOverlay';
 import type { DiceRollerHandle } from '@components/Board/DiceRollOverlay';
 import boardImage from '@assets/Board.svg'
-
+import BoardGrid from "./BoardGrid";
+import { GameBoard } from "@game/board.ts";
 
 
 const Board: React.FC = () => {
@@ -12,10 +13,13 @@ const Board: React.FC = () => {
     diceRef.current?.rollDice('2d6@2,4');
   };
 
+  const board = new GameBoard();
+
   return (
     <div className="h-full aspect-square">
       <div className="relative w-full h-full">
         <img src={boardImage} alt="Game Board" className="w-full h-full" />
+        <BoardGrid className="absolute top-0 left-0 w-full h-full" board={board} />
         <DiceRoller ref={diceRef} className="absolute top-0 left-0 w-full h-full" />
         <button 
           onClick={handleRoll} 

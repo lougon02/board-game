@@ -18,7 +18,7 @@ const App: React.FC = () => {
   return (
     <div className="w-screen h-screen flex items-center justify-center">
       {/* GameClient now fills the parent */}
-      <div className="w-full h-full p-4 relative object-contain">
+      <div className="w-full h-full p-3 relative object-contain">
         <GameClient />
       </div>
     </div>
