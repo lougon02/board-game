@@ -2,11 +2,24 @@ import type { Game } from "boardgame.io";
 import type { MyGameState } from "./state";
 import { moves } from "./moves";
 import { phases } from "./phases";
+import type { BoardState } from '@game/board.ts';
+
+
 
 export const MyGame: Game<MyGameState> = {
-  setup: () => ({
-    cells: Array.from({ length: 19 }, () => Array(19).fill(null)),
-  }),
+  setup: ({ctx}) => {
+    const boardState: BoardState = {
+      playerPositions: {}
+    };
+
+    for(let i = 1; i <= ctx.numPlayers; i++) {
+      boardState.playerPositions[i] = "center";
+    }
+    
+    return {
+      boardState,
+    };
+  },
 
   moves,
 

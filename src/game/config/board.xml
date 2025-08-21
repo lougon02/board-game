@@ -1,0 +1,62 @@
+<Board>
+  <Rooms>
+    <Room id="Center" />
+    <Room id="CargoHold" />
+    <Room id="CommandDeck" />
+    <Room id="Cafeteria" />
+    <Room id="Security" />
+    <Room id="Airlock" />
+    <Room id="Hydroponics" />
+    <Room id="ResearchLab" />
+    <Room id="CrewQuarters" />
+    <Room id="ObservationDeck" />
+    <Room id="EngineBay" />
+  </Rooms>
+
+  <Passages>
+    <Passage from="ResearchLab" to="CargoHold" bidirectional="true" />
+    <Passage from="ObservationDeck" to="Cafeteria" bidirectional="true" />
+    <Passage from="Cafeteria" to="CrewQuarters" bidirectional="true" />
+    <Passage from="Security" to="CommandDeck" bidirectional="true" />
+  </Passages>
+  
+  <Tiles>
+    <Tile char="." type="corridor" />
+    <Tile char="-" type="entrance" />
+    <Tile char="0" type="room" roomId="Center" />
+    <Tile char="A" type="room" roomId="ResearchLab" />
+    <Tile char="B" type="room" roomId="CargoHold" />
+    <Tile char="C" type="room" roomId="Airlock" />
+    <Tile char="D" type="room" roomId="Hydroponics" />
+    <Tile char="E" type="room" roomId="CommandDeck" />
+    <Tile char="F" type="room" roomId="Security" />
+    <Tile char="G" type="room" roomId="CrewQuarters" />
+    <Tile char="H" type="room" roomId="Cafeteria" />
+    <Tile char="I" type="room" roomId="ObservationDeck" />
+    <Tile char="J" type="room" roomId="EngineBay" />
+  </Tiles>
+
+  <Layout>
+    <![CDATA[
+    AAABBBBBBBBCCCDDDDD
+    AAABBBBBBBBCCCDDDDD
+    AAABBBBBBBBC-CDDDDD
+    AAABBBBBBBB...DDDDD
+    AAABBBB--BB...DDDDD
+    AAAAA.........-DDDD
+    AAAAA.........-DDDD
+    AAAA-....000..DDDDD
+    AAAA-....000....EEE
+    AAAAA....000....-EE
+    JJJJJ....000....EEE
+    JJJJJ..........FFFF
+    JJJJJ..........-FFF
+    JJJJJ..........FFFF
+    JJJJJ.....G--GGGGGG
+    IIIII-H--HGGGGGGGGG
+    IIIIIIHHHHGGGGGGGGG
+    IIIIIIHHHHGGGGGGGGG
+    IIIIIIHHHHGGGGGGGGG
+    ]]>
+  </Layout>
+</Board>

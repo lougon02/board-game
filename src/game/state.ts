@@ -1,3 +1,5 @@
+import type {BoardState} from '@game/board.ts';
+
 export interface MyGameState {
-  cells: Array<Array<string | null>>;
+  boardState: BoardState;
 }

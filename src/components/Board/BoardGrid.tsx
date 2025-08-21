@@ -1,16 +1,18 @@
 import React, {useState} from 'react';
 import GameBoard from '@game/board.ts';
 import type { Player } from '@game/board.ts';
+import type { BoardState } from '@game/board.ts';
 
 type BoardGridProps = {
   className?: string;
-  board: GameBoard;
-  borderWidth?: number; // optional prop to set border width
-  scale?: number; // receive current zoom scale from parent
+  boardState: BoardState;
+  borderWidth?: number; 
+  scale?: number;
+  players?: Player[];
 };
 
-const BoardGrid: React.FC<BoardGridProps> = ({ className, board, borderWidth = 2, scale = 1 }) => {
-  const grid = board.getGrid();
+const BoardGrid: React.FC<BoardGridProps> = ({ className, borderWidth = 2, scale = 1 }) => {
+  const grid = Array.from({ length: 19 }, () => Array.from({ length: 19 }, () => null));
 
   return (
     <div className={className}>
@@ -22,7 +24,9 @@ const BoardGrid: React.FC<BoardGridProps> = ({ className, board, borderWidth = 2
               style={{ borderWidth: `${borderWidth / scale}px` }}
               className="border border-gray-400"
             >
-              {player}
+              <div className='text-white drop-shadow-[0_0_3px_black]'>
+                {`(${x+1},${y+1})`}
+              </div>
             </div>
           ))
         )}
