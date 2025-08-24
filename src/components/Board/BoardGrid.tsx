@@ -1,20 +1,45 @@
 import React, {useState} from 'react';
-import {boardGraph} from '@game/board.ts';
+import {boardGraph, findShortestPath} from '@game/board.ts';
 import type { Player } from '@game/board.ts';
 import type { BoardState, GraphNode } from '@game/board.ts';
 import '@styles/boardShapes.css'
 import { numbersToClipPath } from '@utils/func.ts';
+import type { Ctx } from 'boardgame.io';
+import type { MyGameState } from '../../game/state';
 
 type BoardGridProps = {
   className?: string;
-  boardState: BoardState;
+  ctx: Ctx;
+  G: MyGameState;
   borderWidth?: number; 
   scale?: number;
   players?: Player[];
 };
 
-const BoardGrid: React.FC<BoardGridProps> = ({ className, borderWidth = 2, scale = 1 }) => {
+const BoardGrid: React.FC<BoardGridProps> = ({ className, ctx, G, borderWidth = 2, scale = 1 }) => {
+  const [highlightedPath, setHighlightedPath] = useState<string[]>([]);
+
+
   const grid = Array.from({ length: 19 }, () => Array.from({ length: 19 }, () => null));
+  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+  const handleMouseEnter = (id: string) => {
+    // Set a 10ms delay before logging
+    timeoutId = setTimeout(() => {
+      console.log(`Finding shortest path from ${G.boardState.playerPositions[Number(ctx.currentPlayer)]} to ${id}`);
+      const path: string[] = findShortestPath(boardGraph, G.boardState.playerPositions[Number(ctx.currentPlayer)], id, 12);
+      console.log(path);
+      setHighlightedPath(path);
+    }, 25);
+  };
+
+  const handleMouseLeave = (id: string) => {
+    // Clear the timeout if mouse leaves before 10ms
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+  };
 
   return (
     <div className={className}>
@@ -25,7 +50,12 @@ const BoardGrid: React.FC<BoardGridProps> = ({ className, borderWidth = 2, scale
             style={{
               clipPath: numbersToClipPath(data.boundary)
             }}
-            className={`absolute h-full w-full hover:bg-gray-600/60 hover:mix-blend-multiply transition-opacity`}
+            className={`
+              absolute h-full w-full hover:bg-gray-600/60 hover:mix-blend-multiply transition-opacity
+              ${highlightedPath.includes(id) ? 'bg-gray-600/60 mix-blend-multiply' : ''}
+            `}
+            onMouseEnter={() => handleMouseEnter(id)}
+            onMouseLeave={() => handleMouseLeave(id)}
           />
         );
       })}

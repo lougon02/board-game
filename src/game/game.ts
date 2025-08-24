@@ -12,8 +12,8 @@ export const MyGame: Game<MyGameState> = {
       playerPositions: {}
     };
 
-    for(let i = 1; i <= ctx.numPlayers; i++) {
-      boardState.playerPositions[i] = "center";
+    for(let i = 0; i < ctx.numPlayers; i++) {
+      boardState.playerPositions[i] = "Center";
     }
     
     return {

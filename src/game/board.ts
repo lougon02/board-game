@@ -168,3 +168,88 @@ boardLayout.forEach((line, y) => {
     }
   });
 });
+
+export function findShortestPath(
+  graph: Record<string, GraphNode>,
+  startId: string,
+  endId: string,
+  budget: number
+):string[] {
+  // Initialize distances, previous nodes, and visited set
+  const distances: Record<string, number> = {};
+  const previous: Record<string, string | null> = {};
+  const visited: Set<string> = new Set();
+  const pq = new PriorityQueue<string>();
+
+  // Set initial distances to infinity, except start node
+  for (const nodeId in graph) {
+    distances[nodeId] = Infinity;
+    previous[nodeId] = null;
+  }
+  distances[startId] = 0;
+  pq.enqueue(startId, 0);
+
+  while (!pq.isEmpty()) {
+    const currentId = pq.dequeue()!;
+    if (visited.has(currentId)) continue;
+    visited.add(currentId);
+
+    // If current distance exceeds budget, skip
+    if (distances[currentId] > budget) continue;
+
+    if (currentId === endId) break; // Reached destination
+
+    const currentNode = graph[currentId];
+    for (const edge of currentNode.edges) {
+      const neighborId = edge.to.id;
+      if (visited.has(neighborId)) continue;
+
+      // Cost includes: edge weight + weight of leaving current node
+      const pathWeight = distances[currentId] + edge.weight + (currentId === startId ? 0 : currentNode.weight);
+
+      // Only consider paths within budget
+      if (pathWeight <= budget && pathWeight < distances[neighborId]) {
+        distances[neighborId] = pathWeight;
+        previous[neighborId] = currentId;
+        pq.enqueue(neighborId, pathWeight);
+      }
+    }
+  }
+
+  // Reconstruct path
+  const path: string[] = [];
+  let currentId: string | null = endId;
+  while (currentId !== null) {
+    path.push(currentId);
+    currentId = previous[currentId];
+  }
+  path.reverse();
+
+  // Verify path validity and budget
+  if (path[0] !== startId || distances[endId] === Infinity || distances[endId] > budget) {
+    return []; // No valid path within budget
+  }
+
+  return path;
+}
+
+// Simple Priority Queue implementation for Dijkstra's algorithm
+class PriorityQueue<T> {
+  private items: { element: T; priority: number }[] = [];
+
+  enqueue(element: T, priority: number): void {
+    this.items.push({ element, priority });
+    this.items.sort((a, b) => a.priority - b.priority);
+  }
+
+  dequeue(): T | undefined {
+    return this.items.shift()?.element;
+  }
+
+  isEmpty(): boolean {
+    return this.items.length === 0;
+  }
+}
+
+//measure how long it takes to run this function
+console.log(findShortestPath(boardGraph, "ResearchLab", "Security", 1));

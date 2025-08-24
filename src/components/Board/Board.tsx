@@ -12,10 +12,10 @@ import {PlayerIcon} from "./PlayerIcon"
 type BoardProps = {
   ctx: Ctx;
   G: MyGameState;
-  moves: MoveMap<MyGameState, Record<string, unknown>>;
+  //moves: MoveMap<MyGameState, Record<string, unknown>>;
 }
 
-const Board: React.FC<BoardProps> = ({ ctx, G, moves }) => {
+const Board: React.FC<BoardProps> = ({ ctx, G/*, moves*/}) => {
   const diceRef = useRef<DiceRollerHandle>(null);
   const [zoomScale, setZoomScale] = useState(1);
 
@@ -37,7 +37,10 @@ const Board: React.FC<BoardProps> = ({ ctx, G, moves }) => {
           <TransformComponent>
             <div>
               <img src={boardImage} alt="Game Board" className="w-full h-full" />
-              <BoardGrid className="absolute top-0 left-0 w-full h-full" boardState={G.boardState} borderWidth={1} scale={zoomScale} />
+              <BoardGrid
+                className="absolute top-0 left-0 w-full h-full"
+                ctx={ctx} G={G} borderWidth={1} scale={zoomScale}
+              />
             </div>
             
           </TransformComponent>
