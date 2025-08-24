@@ -7,6 +7,7 @@ import type { BoardState } from '@game/board.ts';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import type { Ctx, MoveMap } from "boardgame.io";
 import type { MyGameState } from "@game/state.ts";
+import {PlayerIcon} from "./PlayerIcon"
 
 type BoardProps = {
   ctx: Ctx;
@@ -22,7 +23,6 @@ const Board: React.FC<BoardProps> = ({ ctx, G, moves }) => {
     diceRef.current?.rollDice('2d6@2,4');
   };
 
-
   return (
     <div className="h-full aspect-square">
       <div className="relative w-full h-full">
@@ -32,7 +32,7 @@ const Board: React.FC<BoardProps> = ({ ctx, G, moves }) => {
           maxScale={10}
           wheel={{ step: 0.1 }}
           doubleClick={{ disabled: true }}
-          onZoom={(ref) => {setZoomScale(ref.state.scale);console.log(`Zoom scale: ${ref.state.scale}`)}}
+          onZoom={(ref) => {setZoomScale(ref.state.scale);}}
         >
           <TransformComponent>
             <div>

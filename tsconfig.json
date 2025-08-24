@@ -10,7 +10,8 @@
       "@assets/*": ["assets/*"],
       "@styles/*": ["styles/*"],
       "@game/*": ["game/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"]

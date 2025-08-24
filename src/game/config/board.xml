@@ -1,16 +1,95 @@
-<Board>
+<Board size="19">
   <Rooms>
-    <Room id="Center" />
-    <Room id="CargoHold" />
-    <Room id="CommandDeck" />
-    <Room id="Cafeteria" />
-    <Room id="Security" />
-    <Room id="Airlock" />
-    <Room id="Hydroponics" />
-    <Room id="ResearchLab" />
-    <Room id="CrewQuarters" />
-    <Room id="ObservationDeck" />
-    <Room id="EngineBay" />
+    <Room id="Center">
+      <Boundary>
+        <Point x="9" y="7" />
+        <Point x="12" y="7" />
+        <Point x="12" y="11" />
+        <Point x="9" y="11" />
+      </Boundary>
+    </Room>
+    <Room id="ResearchLab">
+      <Boundary>
+        <Point x="0" y="0" />
+        <Point x="3" y="0" />
+        <Point x="3" y="5" />
+        <Point x="5" y="5" />
+        <Point x="5" y="10" />
+        <Point x="0" y="10" />
+      </Boundary>
+    </Room>
+    <Room id="CargoHold">
+      <Boundary>
+        <Point x="3" y="0" />
+        <Point x="11" y="0" />
+        <Point x="11" y="5" />
+        <Point x="3" y="5" />
+      </Boundary>
+    </Room>
+    <Room id="Airlock">
+      <Boundary>
+        <Point x="11" y="0" />
+        <Point x="14" y="0" />
+        <Point x="14" y="3" />
+        <Point x="11" y="3" />
+      </Boundary>
+    </Room>
+    <Room id="Hydroponics">
+      <Boundary>
+        <Point x="14" y="0" />
+        <Point x="19" y="0" />
+        <Point x="19" y="8" />
+        <Point x="14" y="8" />
+      </Boundary>
+    </Room>
+    <Room id="CommandDeck">
+      <Boundary>
+        <Point x="16" y="8" />
+        <Point x="19" y="8" />
+        <Point x="19" y="11" />
+        <Point x="16" y="11" />
+      </Boundary>
+    </Room>
+    <Room id="Security">
+      <Boundary>
+        <Point x="15" y="11" />
+        <Point x="19" y="11" />
+        <Point x="19" y="14" />
+        <Point x="15" y="14" />
+      </Boundary>
+    </Room>
+    <Room id="CrewQuarters">
+      <Boundary>
+        <Point x="10" y="14" />
+        <Point x="19" y="14" />
+        <Point x="19" y="19" />
+        <Point x="10" y="19" />
+      </Boundary>
+    </Room>
+    <Room id="Cafeteria">
+      <Boundary>
+        <Point x="6" y="15" />
+        <Point x="10" y="15" />
+        <Point x="10" y="19" />
+        <Point x="6" y="19" />
+      </Boundary>
+    </Room>
+    <Room id="ObservationDeck">
+      <Boundary>
+        <Point x="0" y="15" />
+        <Point x="6" y="15" />
+        <Point x="6" y="19" />
+        <Point x="0" y="19" />
+      </Boundary>
+    </Room>
+    <Room id="EngineBay">
+      <Boundary>
+        <Point x="0" y="10" />
+        <Point x="5" y="10" />
+        <Point x="5" y="15" />
+        <Point x="0" y="15" />
+      </Boundary>
+    </Room>
   </Rooms>
 
   <Passages>

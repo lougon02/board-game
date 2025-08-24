@@ -11,6 +11,12 @@ export type BoardState = {
 
 type Room = {
   id: string;
+  Boundary: {Point: Point[]};
+}
+
+type Point = {
+  x: number;
+  y: number;
 }
 
 type Passage = {
@@ -21,12 +27,14 @@ type Passage = {
 
 type Tile = {
   char: string;
-  type: "corridor" | "verticalEntrance" | "horizontalEntrance" | "room";
+  type: "corridor" | "entrance" | "room";
   roomId?: string;
 }
 
-type GraphNode = {
+export type GraphNode = {
   id: string;
+  type: string;
+  data: any;
   edges: GraphEdge[];
   weight: number;
 }
@@ -41,14 +49,19 @@ type GraphEdge = {
 const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: "" });
 const boardData = parser.parse(boardXml).Board;
 console.log(boardData);
+const boardSize = boardData.size;
 const boardLayout: string[] = boardData.Layout.trim().split("\n").map((line: string) => line.trim())
-const boardGraph: Record<string, GraphNode> = {};  
+export const boardGraph: Record<string, GraphNode> = {};  
 
 
 // Initialize rooms in the graph
 boardData.Rooms.Room.forEach((room: Room) => {
   boardGraph[room.id] = {
     id: room.id,
+    type: "room",
+    data: {
+      boundary: room.Boundary.Point.flatMap(point => [point.x/boardSize, point.y/boardSize]),
+    },
     edges: [],
     weight: 9999,
   };
@@ -96,6 +109,10 @@ boardLayout.forEach((line, y) => {
     if(tile?.type == "corridor"){
       boardGraph[`${x+1}-${y+1}`] = {
         id: `${x+1}-${y+1}`,
+        type: "corridor",
+        data: {
+          boundary: [x, y, x+1, y, x+1, y+1, x, y+1].map(coord => coord / boardSize),
+        },
         edges: [],
         weight: 0,
       };
@@ -151,5 +168,3 @@ boardLayout.forEach((line, y) => {
     }
   });
 });
-
-export { boardGraph };
