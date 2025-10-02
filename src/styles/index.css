@@ -1,11 +1,51 @@
 @import "tailwindcss";
 
+@theme {
+  /* ---------------- */
+  /* Backgrounds       */
+  /* ---------------- */
+  --color-background: #121212;       /* main container, very dark gray/black */
+  --color-panel-bg: #1E1E1E;         /* panels / notes background */
+  --color-header-bg: #2A2A2A;        /* table headers */
+  --color-separator-bg: #1A1A1A;     /* category separators */
+  --color-hover: #333333;            /* row hover */
+
+  /* ---------------- */
+  /* Borders           */
+  /* ---------------- */
+  --color-border: #444444;           /* normal borders */
+  --color-border-strong: #666666;    /* category / header borders */
+
+  /* ---------------- */
+  /* Text              */
+  /* ---------------- */
+  --color-text-primary: #EAEAEA;     /* main text */
+  --color-text-secondary: #B0B0B0;   /* less prominent */
+  --color-text-muted: #7A7A7A;       /* hints / subtle text */
+
+  /* ---------------- */
+  /* Game cell states  */
+  /* ---------------- */
+  --color-success: #28A745;          /* ✅ green */
+  --color-danger: #DC3545;           /* ❌ red */
+  --color-maybe: #FFC107;            /* ❓ yellow */
+  --color-empty: #AAAAAA;            /* empty / starting state */
+
+  /* ---------------- */
+  /* Shadows / highlights */
+  /* ---------------- */
+  --color-shadow: rgba(0,0,0,0.25);  /* subtle shadows */
+  --color-highlight: rgba(255,255,255,0.05); /* faint highlight for active cells */
+}
+
+/* --------------------- */
+/* Base layout            */
+/* --------------------- */
 html, body, #root {
   height: 100%;
   margin: 0;
   overflow: hidden; /* prevent scrollbars */
 }
-
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -13,8 +53,8 @@ html, body, #root {
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -22,13 +62,16 @@ html, body, #root {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* --------------------- */
+/* Links and headings     */
+/* --------------------- */
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-text-secondary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-text-primary);
 }
 
 h1 {
@@ -36,25 +79,33 @@ h1 {
   line-height: 1.1;
 }
 
+/* --------------------- */
+/* Buttons                */
+/* --------------------- */
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid var(--color-border);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--color-panel-bg);
+  color: var(--color-text-primary);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-text-secondary);
+  background-color: var(--color-hover);
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* --------------------- */
+/* Light mode overrides   */
+/* --------------------- */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -68,6 +119,9 @@ button:focus-visible {
   }
 }
 
+/* --------------------- */
+/* Layout containers      */
+/* --------------------- */
 .bgio-client {
   width: 100%;
   height: 100%;
@@ -79,3 +133,30 @@ button:focus-visible {
   overflow: hidden; /* optional if content may overflow */
 }
 
+/* --------------------- */
+/* NotesTable specific    */
+/* --------------------- */
+.notes-table {
+  background-color: var(--color-panel-bg);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.notes-table th {
+  background-color: var(--color-header-bg);
+  border: 1px solid var(--color-border-strong);
+}
+
+.notes-table td {
+  border: 1px solid var(--color-border);
+}
+
+.notes-table tr:hover td {
+  background-color: var(--color-hover);
+}
+
+/* Cell state colors */
+.notes-cell-success { color: var(--color-success); }
+.notes-cell-danger  { color: var(--color-danger); }
+.notes-cell-maybe   { color: var(--color-maybe); }
+.notes-cell-empty   { color: var(--color-empty); }
